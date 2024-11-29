@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Chat from "../components/Chat";
+import { BACKEND_URL } from "../config";
 
 export interface MessageType {
   username: string;
@@ -21,7 +22,7 @@ function Home() {
     }
 
     if (!socket.current) {
-      const ws = new WebSocket(import.meta.env.VITE_BACKEND_API_URL);
+      const ws = new WebSocket(`${BACKEND_URL}`);
       socket.current = ws;
     }
 

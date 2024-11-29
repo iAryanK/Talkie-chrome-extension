@@ -1,0 +1,1 @@
+export const BACKEND_URL="wss://talkie-backend-juj9.onrender.com"
