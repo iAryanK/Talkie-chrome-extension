@@ -4,6 +4,14 @@ const Topbar = () => {
     window.location.reload();
   };
 
+  const myFrequency = () => {
+    const self_data = localStorage.getItem("self");
+    if (self_data) {
+      const parsed_self_data = JSON.parse(self_data);
+      return parsed_self_data.frequency;
+    }
+  };
+
   return (
     <div className="p-2 rounded bg-zinc-800 tracking-wider h-12 flex items-center justify-between">
       <img
@@ -11,7 +19,7 @@ const Topbar = () => {
         alt="Talkie"
         className="select-none w-8 h-8 opacity-80 hover:animate-pulse p-[2px] cursor-pointer"
       />{" "}
-      <h1 className="font-bold tracking-widest select-none">Talkie</h1>
+      <h1 className="font-bold tracking-widest select-none">{myFrequency()}</h1>
       <button onClick={handleLogout}>
         <img
           src="./logout.svg"

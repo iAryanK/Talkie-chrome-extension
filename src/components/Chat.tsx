@@ -100,21 +100,25 @@ const Chat = ({
             className="h-fit max-h-[23rem] overflow-y-scroll px-2 scroll-mb-0 mx-3 flex flex-col gap-2 py-2 "
           >
             {messages.map((eachMessage, index) => (
-              <div key={index} className={` text-white`}>
+              <div key={index} className={` text-white `}>
                 {eachMessage && (
                   <>
-                    <div className="leading-tight text-sm tracking-wide pl-1">
+                    <p className="text-zinc-500 text-sm tracking-wide flex items-center gap-1 mt-2">
+                      <img
+                        src="./terminal.svg"
+                        className="w-3 h-3 inline-block"
+                      />
+                      <div>
+                        {formattedName(eachMessage.username)} •{" "}
+                        {eachMessage.timestamp}
+                      </div>
+                    </p>
+
+                    <div className="leading-tight tracking-wide text-base pl-1">
                       <Markdown remarkPlugins={[remarkGfm]}>
                         {eachMessage.message}
                       </Markdown>
                     </div>
-                    <p className="text-zinc-500 text-xs tracking-wide text-right">
-                      {formattedName(eachMessage.username)} •{" "}
-                      {eachMessage.timestamp}
-                    </p>
-                    {index !== messages.length - 1 && (
-                      <div className="rounded-full border-zinc-800 border  my-2 w-1/6 " />
-                    )}
                   </>
                 )}
               </div>
