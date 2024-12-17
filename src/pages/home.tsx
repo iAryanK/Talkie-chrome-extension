@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Chat from "../components/Chat";
 import { BACKEND_URL } from "../config";
+import { addMessageToLocalStorage, getMessageFromLocalStorage } from "../utils";
 
 export interface MessageType {
   username: string;
@@ -38,6 +39,9 @@ function Home() {
       );
     };
 
+    if (self.current?.frequency)
+      setMessages(getMessageFromLocalStorage(self.current.frequency));
+
     return () => {
       socket.current?.close();
       socket.current = null;
@@ -49,6 +53,9 @@ function Home() {
       socket.current.onmessage = (message) => {
         const parsedMessage = JSON.parse(message.data);
         setMessages((m) => [...m, parsedMessage]);
+
+        if (self.current?.frequency)
+          addMessageToLocalStorage(self.current.frequency, parsedMessage);
       };
     }
   }, [messages]);
